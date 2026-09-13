@@ -10,6 +10,7 @@ import CustomKeyboard from '@/components/ui/custom-keyboard';
 import LoaderAnimation from '@/components/ui/loader-animation';
 import MacDock from '@/components/ui/mac-dock';
 import AiImageCard from '@/components/ui/ai-image-card';
+import SearchBar from '@/components/ui/search-bar';
 import Link from 'next/link';
 
 export default function ComponentsPage() {
@@ -141,6 +142,18 @@ export default function ComponentsPage() {
             >
               <div className="my-6 transform scale-[0.65] xs:scale-[0.75] sm:scale-[0.85] origin-center">
                 <MacDock />
+              </div>
+            </ComponentCard>
+          </li>
+          <li>
+            <ComponentCard
+              title="Search Bar"
+              description="Command-palette style searchable dropdown with keyboard navigation (↑/↓/Enter/Esc), live match highlighting, animated active pill, and click-outside dismissal."
+              href="/components/search-bar"
+              badge="Interactive · UI"
+            >
+              <div className="my-4 w-full max-w-[320px]">
+                <SearchBar />
               </div>
             </ComponentCard>
           </li>
