@@ -5,10 +5,10 @@ import Container from '@/components/layouts/Container';
 import SectionHeading from '@/components/common/SectionHeading';
 import RepeatSeparator from '@/components/ui/repeat-separator';
 import ComponentCard from '@/components/components/ComponentCard';
-import Spotify from '@/components/landing/Spotify';
 import CustomKeyboard from '@/components/ui/custom-keyboard';
 import LoaderAnimation from '@/components/ui/loader-animation';
 import AiImageCard from '@/components/ui/ai-image-card';
+import SearchBar from '@/components/ui/search-bar';
 import { Button } from '@/components/ui/button';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
@@ -31,16 +31,6 @@ export default function ComponentsSection() {
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <li>
             <ComponentCard
-              title="Music Player"
-              description="Interactive live music player widget with real-time audio spectrum animations, vinyl CD disc spin, and song metadata."
-              href="/components/spotify"
-              badge="Widget · Audio"
-            >
-              <Spotify />
-            </ComponentCard>
-          </li>
-          <li>
-            <ComponentCard
               title="Mac Keyboard"
               description="Interactive Mac keyboard replica with real-time keystroke tracking, sound feedback, and Space Black / Silver themes."
               href="/components/mac-keyboard"
@@ -48,6 +38,21 @@ export default function ComponentsSection() {
             >
               <div className="transform scale-[0.4] xs:scale-[0.5] sm:scale-[0.6] origin-center my-2">
                 <CustomKeyboard theme="dark" enableSound={false} showPreview={true} />
+              </div>
+            </ComponentCard>
+          </li>
+          <li>
+            <ComponentCard
+              title="Image Generation Card"
+              description="Recreates the AI image-generation state used in ChatGPT, DALL·E, and Midjourney — blinking grid, blur-to-focus reveal, shine sweep, and a live generation timer."
+              href="/components/ai-image-card"
+              badge="UI · Animation"
+            >
+              <div
+                className="my-2 aspect-square"
+                style={{ width: 'clamp(150px, 22vw, 220px)' }}
+              >
+                <AiImageCard generateDuration={3} />
               </div>
             </ComponentCard>
           </li>
@@ -72,16 +77,13 @@ export default function ComponentsSection() {
           </li>
           <li>
             <ComponentCard
-              title="Image Generation Card"
-              description="Recreates the AI image-generation state used in ChatGPT, DALL·E, and Midjourney — blinking grid, blur-to-focus reveal, shine sweep, and a live generation timer."
-              href="/components/ai-image-card"
-              badge="UI · Animation"
+              title="Search Bar"
+              description="Command-palette style searchable dropdown with keyboard navigation (↑/↓/Enter/Esc), live match highlighting, animated active pill, and click-outside dismissal."
+              href="/components/search-bar"
+              badge="Interactive · UI"
             >
-              <div
-                className="my-2 aspect-square"
-                style={{ width: 'clamp(150px, 22vw, 220px)' }}
-              >
-                <AiImageCard generateDuration={3} />
+              <div className="my-4 w-full max-w-[280px]">
+                <SearchBar />
               </div>
             </ComponentCard>
           </li>
