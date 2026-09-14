@@ -107,6 +107,9 @@ export const metadata: Metadata = {
   },
 
   manifest: '/site.webmanifest',
+  verification: {
+    google: 'CtQ08DFx38_fGE2AYkzRwuG9w42ekquSIKklDT8S0Uo',
+  },
   alternates: {
     canonical: siteUrl,
   },
