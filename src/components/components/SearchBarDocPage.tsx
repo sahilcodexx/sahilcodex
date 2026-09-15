@@ -575,7 +575,7 @@ export default function Page() {
                     className={
                       inZoom
                         ? 'fixed inset-0 z-[999999] w-screen h-screen bg-background p-6 sm:p-10 flex flex-col items-center justify-between overflow-hidden animate-in fade-in duration-100'
-                        : 'relative w-full rounded-2xl border border-border bg-card/60 p-4 sm:p-6 flex flex-col items-center justify-between min-h-[260px]'
+                        : 'relative z-10 w-full overflow-hidden rounded-2xl border border-border bg-card/60 p-4 sm:p-6 flex flex-col items-center justify-between min-h-[520px]'
                     }
                   >
                     {/* Canvas Top Bar */}
@@ -629,7 +629,7 @@ export default function Page() {
                 if (isZoomed && mounted) {
                   return (
                     <>
-                      <div className="relative w-full rounded-2xl border border-border bg-card/60 p-4 sm:p-6 flex flex-col items-center justify-center min-h-[260px] opacity-0" />
+                      <div className="relative z-10 w-full overflow-hidden rounded-2xl border border-border bg-card/60 p-4 sm:p-6 flex flex-col items-center justify-between min-h-[520px] opacity-0" />
                       {createPortal(renderCanvas(true), document.body)}
                     </>
                   );
