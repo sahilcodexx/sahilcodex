@@ -1,5 +1,6 @@
 {
   "name": "search-bar",
+  "type": "registry:ui",
   "description": "Command-palette style searchable dropdown with keyboard navigation (↑/↓/Enter/Esc), live match highlighting, animated active pill, and click-outside dismissal. Built with Motion and Lucide icons.",
   "dependencies": [
     "motion",

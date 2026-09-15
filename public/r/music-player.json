@@ -1,5 +1,6 @@
 {
   "name": "music-player",
+  "type": "registry:ui",
   "description": "Interactive live music player widget with real-time audio spectrum animations, vinyl CD disc spin, and song metadata",
   "dependencies": [
     "lucide-react",

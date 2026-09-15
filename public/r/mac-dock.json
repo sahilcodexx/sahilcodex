@@ -1,5 +1,6 @@
 {
   "name": "mac-dock",
+  "type": "registry:ui",
   "description": "Interactive macOS style animated Dock component with live window previews on hover built with Motion and Lucide icons.",
   "dependencies": [
     "lucide-react",

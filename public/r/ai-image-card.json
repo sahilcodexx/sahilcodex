@@ -1,5 +1,6 @@
 {
   "name": "ai-image-card",
+  "type": "registry:ui",
   "description": "AI-style image generation card with a blinking grid build-up, blur-to-focus reveal, shine sweep, and live generation timer. Built with Motion.",
   "dependencies": [
     "motion"

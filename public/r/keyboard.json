@@ -1,5 +1,6 @@
 {
   "name": "keyboard",
+  "type": "registry:ui",
   "description": "A Keychron K2 inspired keyboard component with optional haptics and mechanical sound effects",
   "dependencies": [
     "lucide-react",

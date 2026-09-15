@@ -1,5 +1,6 @@
 {
   "name": "loader-animation",
+  "type": "registry:ui",
   "description": "Animated multilingual greeting loader component with smooth text transitions.",
   "dependencies": [
     "motion"
