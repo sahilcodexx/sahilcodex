@@ -119,7 +119,7 @@ export default function Contact() {
               <path d="m12 19-7-7 7-7" />
               <path d="M19 12H5" />
             </svg>
-            Home
+            Back
           </Link>
           <span className="text-xs sm:text-sm text-muted-foreground font-medium border border-border px-3 py-1 rounded-full bg-muted/30">
             Available for freelance
