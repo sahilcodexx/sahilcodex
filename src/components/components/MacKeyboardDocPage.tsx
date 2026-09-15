@@ -56,7 +56,7 @@ export default function MacKeyboardDocPage() {
   }, []);
 
   const isDark =
-    typeof window !== 'undefined'
+    mounted
       ? document.documentElement.classList.contains('dark')
       : resolvedTheme === 'dark';
 

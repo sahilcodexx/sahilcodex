@@ -39,7 +39,7 @@ export default function AiImageCardDocPage() {
   }, []);
 
   const isDark =
-    typeof window !== 'undefined'
+    mounted
       ? document.documentElement.classList.contains('dark')
       : resolvedTheme === 'dark';
 

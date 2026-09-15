@@ -356,7 +356,7 @@ export default function SpotifyDocPage() {
   }, []);
 
   const isDark =
-    typeof window !== 'undefined'
+    mounted
       ? document.documentElement.classList.contains('dark')
       : resolvedTheme === 'dark';
 
