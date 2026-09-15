@@ -8,6 +8,7 @@ import Layout from '@/components/common/Layout';
 import { Quote } from '@/components/common/Quote';
 import Footer from '@/components/common/Footer';
 import PageTracker from '@/components/common/PageTracker';
+import ScrollToTop from '@/components/common/ScrollToTop';
 import { Analytics } from '@vercel/analytics/react';
 
 const geistSans = Geist({
@@ -167,6 +168,7 @@ export default function RootLayout({
         />
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <PageTracker />
+          <ScrollToTop />
           <Analytics />
           <div className="min-h-screen dark:bg-black/50">
           <Container>
