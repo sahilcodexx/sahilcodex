@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { getMarkdownContent, getMarkdownSlugs } from '@/lib/markdown';
-import Container from '@/components/layouts/Container';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { ProjectComponents } from '@/components/projects/ProjectComponents';
+import { ProjectCaseStudy, type CaseStudy } from '@/components/projects/ProjectCaseStudy';
 import { ZoomableImage } from '@/components/projects/ZoomableImage';
 import { ProjectNavigation } from '@/components/common/ProjectNavigation';
 import { notFound } from 'next/navigation';
@@ -20,20 +17,24 @@ import { ProjectCardData } from '@/config/projects/ProjectCardData';
 import { ProjectHeaderActions } from '@/components/projects/ProjectHeaderActions';
 import RepeatSeparator from '@/components/ui/repeat-separator';
 
-interface ProjectMeta {
+interface ProjectMeta extends CaseStudy {
   title?: string;
   description?: string;
   image?: string;
   technologies?: string[];
-  status?: 'completed' | 'in-progress' | 'planning';
+  status?: string;
+  statusLabel?: string;
   statusVariant?: 'default' | 'secondary' | 'destructive' | 'outline';
   timeline?: string;
   role?: string;
   team?: string;
   live?: string;
+  liveLabel?: string;
+  betaUrl?: string;
+  npm?: string;
   github?: string;
-  challenges?: string[];
-  learnings?: string[];
+  applicationCategory?: string;
+  operatingSystem?: string;
 }
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sahilcodex.vercel.app';
@@ -124,8 +125,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     '@type': 'SoftwareApplication',
     name: projectMeta.title,
     description: projectMeta.description,
-    applicationCategory: 'DeveloperApplication',
-    operatingSystem: 'Web',
+    applicationCategory: projectMeta.applicationCategory || 'DeveloperApplication',
+    operatingSystem: projectMeta.operatingSystem || 'Web',
     image: projectMeta.image
       ? projectMeta.image.startsWith('http')
         ? projectMeta.image
@@ -171,7 +172,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <div className="screen-line-top screen-line-bottom py-px">
             <div className="mx-auto h-4 w-full" />
           </div>
-          <div className="screen-line-bottom pb-4">
+          <div className="screen-line-bottom py-4">
             <h1
               data-slot="doc-title"
               className="px-4 text-3xl font-semibold tracking-tight text-balance md:max-w-md"
@@ -182,12 +183,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </div>
 
         {/* 2. Document Grid with Columns */}
-        <div
-          data-slot="doc-grid"
-          className="mx-auto w-full"
-        >
+        <div data-slot="doc-grid" className="mx-auto w-full">
           <div data-slot="doc-content-col" className="mx-auto w-full">
-            <div data-slot="prose" className="prose dark:prose-invert w-full px-4 pt-12">
+            <div data-slot="prose" className="prose dark:prose-invert w-full px-4 pt-7">
               {/* Project description (subheading) */}
               <p className="text-muted-foreground mb-6 text-base leading-relaxed font-normal text-wrap sm:text-base">
                 {projectMeta.description}
@@ -198,31 +196,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <ZoomableImage src={projectMeta.image} alt={projectMeta.title || slug} priority />
               )}
 
-              {/* Project Meta Information Grid */}
-              <div className="bg-muted/20 not-prose mb-8 grid gap-4 rounded-lg border p-4 sm:grid-cols-2 lg:grid-cols-4">
-                <div>
-                  <h5 className="text-muted-foreground text-sm font-semibold">Timeline</h5>
-                  <p className="text-sm">{projectMeta.timeline}</p>
-                </div>
-                <div>
-                  <h5 className="text-muted-foreground text-sm font-semibold">Role</h5>
-                  <p className="text-sm">{projectMeta.role}</p>
-                </div>
-                {projectMeta.team && (
-                  <div>
-                    <h5 className="text-muted-foreground text-sm font-semibold">Team</h5>
-                    <p className="text-sm">{projectMeta.team}</p>
-                  </div>
-                )}
-                <div>
-                  <h5 className="text-muted-foreground text-sm font-semibold">Status</h5>
-                  <Badge variant={projectMeta.statusVariant} className="mt-1 text-xs">
-                    {projectMeta.status
-                      ? projectMeta.status.charAt(0).toUpperCase() + projectMeta.status.slice(1)
-                      : 'Unknown'}
-                  </Badge>
-                </div>
-              </div>
+              <dl className="border-border not-prose mb-6 grid grid-cols-2 gap-x-6 gap-y-5 border-y py-5 sm:grid-cols-4">
+                {[
+                  { label: 'Role', value: projectMeta.role },
+                  { label: 'Timeline', value: projectMeta.timeline },
+                  { label: 'Team', value: projectMeta.team },
+                  { label: 'Status', value: projectMeta.statusLabel || projectMeta.status },
+                ]
+                  .filter((item) => item.value)
+                  .map((item) => (
+                    <div key={item.label}>
+                      <dt className="text-muted-foreground mb-1.5 text-xs">{item.label}</dt>
+                      <dd className="text-foreground text-sm leading-6">{item.value}</dd>
+                    </div>
+                  ))}
+              </dl>
 
               {/* Links and Action Buttons */}
               <div className="not-prose mb-8 flex flex-wrap gap-3">
@@ -234,7 +222,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     className="inset-shadow bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium whitespace-nowrap shadow-xs disabled:pointer-events-none disabled:opacity-50"
                   >
                     <Website className="size-4" />
-                    Live Demo
+                    {projectMeta.liveLabel || 'Live demo'}
                   </a>
                 )}
                 {projectMeta.github && (
@@ -245,70 +233,47 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     className="inset-shadow bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium whitespace-nowrap shadow-xs disabled:pointer-events-none disabled:opacity-50"
                   >
                     <Github className="size-4" />
-                    Source Code
+                    Source code
+                  </a>
+                )}
+                {projectMeta.betaUrl && (
+                  <a
+                    href={projectMeta.betaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-800 transition-colors hover:bg-green-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green-600 dark:border-green-800/50 dark:bg-green-950/50 dark:text-green-300 dark:hover:bg-green-900/50"
+                  >
+                    Beta version
                   </a>
                 )}
               </div>
 
-              <div className="not-prose mb-8">
-                <div className="bg-muted/20 rounded-lg border p-4">
-                  <h3 className="mb-3 text-lg font-semibold">Technology Stack</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {projectMeta.technologies &&
-                      projectMeta.technologies.map((tech) => (
-                        <div
-                          key={tech}
-                          className="bg-muted/50 border-border inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium"
-                        >
-                          <span>{tech}</span>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Challenges & Learnings */}
-              {(projectMeta.challenges?.length || projectMeta.learnings?.length) && (
-                <div className="not-prose mb-8 grid gap-6 md:grid-cols-2">
-                  {projectMeta.challenges && projectMeta.challenges.length > 0 && (
-                    <div className="rounded-lg border border-yellow-200 bg-yellow-50/20 p-4 dark:border-yellow-800/40 dark:bg-yellow-950/10">
-                      <h3 className="mb-3 text-lg font-semibold text-yellow-800 dark:text-yellow-200">
-                        Key Challenges
-                      </h3>
-                      <ul className="space-y-2">
-                        {projectMeta.challenges.map((challenge, index) => (
-                          <li
-                            key={index}
-                            className="flex items-start gap-2 text-sm text-yellow-700 dark:text-yellow-300"
-                          >
-                            <span className="mt-1.5 block size-1.5 shrink-0 rounded-full bg-yellow-500 dark:bg-yellow-400" />
-                            <span>{challenge}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {projectMeta.learnings && projectMeta.learnings.length > 0 && (
-                    <div className="rounded-lg border border-green-200 bg-green-50/20 p-4 dark:border-green-800/40 dark:bg-green-950/10">
-                      <h3 className="mb-3 text-lg font-semibold text-green-800 dark:text-green-200">
-                        Key Learnings
-                      </h3>
-                      <ul className="space-y-2">
-                        {projectMeta.learnings.map((learning, index) => (
-                          <li
-                            key={index}
-                            className="flex items-start gap-2 text-sm text-green-700 dark:text-green-300"
-                          >
-                            <span className="mt-1.5 block size-1.5 shrink-0 rounded-full bg-green-500 dark:bg-green-400" />
-                            <span>{learning}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+              {projectMeta.technologies?.length && (
+                <div className="not-prose mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                  <h2 className="text-muted-foreground text-[13px]">
+                    {projectMeta.status === 'planning' ? 'Focus' : 'Built with'}
+                  </h2>
+                  <ul className="flex flex-wrap gap-2">
+                    {projectMeta.technologies.map((tech) => (
+                      <li
+                        key={tech}
+                        className="border-border text-muted-foreground rounded-sm border px-2 py-1 font-mono text-[12px]"
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
+
+              <ProjectCaseStudy
+                isUpcoming={projectMeta.status === 'planning'}
+                problem={projectMeta.problem}
+                contribution={projectMeta.contribution}
+                decisions={projectMeta.decisions}
+                outcome={projectMeta.outcome}
+                evidence={projectMeta.evidence}
+              />
 
               {/* Markdown Body Content */}
               <ReactMarkdown

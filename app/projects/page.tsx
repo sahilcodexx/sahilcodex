@@ -50,6 +50,7 @@ export default async function ProjectsPage() {
         id: slug,
         title: staticData?.title || content?.meta.title || slug,
         subheading: staticData?.subheading || null,
+        statusLabel: content?.meta.status === 'planning' ? 'Upcoming' : undefined,
         description: content?.meta.description || '',
         img: {
           src: content?.meta.image || '',
@@ -61,7 +62,7 @@ export default async function ProjectsPage() {
           details: `/projects/${slug}`,
         },
         technologies: (content?.meta.technologies || []).map((name: string) => ({ name })),
-        isWorking: content?.meta.status?.toLowerCase() === 'completed',
+        isWorking: content?.meta.isLive ?? content?.meta.status?.toLowerCase() === 'completed',
         isBuilding: content?.meta.status?.toLowerCase() === 'in-progress',
         details: true,
       };

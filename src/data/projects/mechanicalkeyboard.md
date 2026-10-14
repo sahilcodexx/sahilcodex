@@ -1,54 +1,58 @@
 ---
-title: "Mechanical Keyboard: Interactive Simulator"
-description: "A browser-based mechanical keyboard with real switch sounds, several keycap colorways, haptics on mobile, and a volume slider. Built with React and the HTML5 Audio Context API."
-image: "/projects/keyui.avif"
+title: Mechanical Keyboard
+description: >-
+  A React keyboard component library with Apple Magic Keyboard and Keychron K2
+  layouts, physical key tracking, switch sounds, and haptic feedback on
+  supported devices.
+image: /projects/keyui.avif
 technologies:
   - React
   - TypeScript
-  - Vite
   - Tailwind CSS
-  - Lucide Icons
-  - Web Haptics API
-  - HTML5 Audio Context
-github: "https://github.com/sahilcodexx/MechanicalKeyboard"
-live: "https://keyui.vercel.app/"
-timeline: "2 Weeks"
-role: "Frontend & Audio Engineer"
-team: "Solo"
-status: "Completed"
+  - Web Audio
+  - Web Haptics
+github: 'https://github.com/sahilcodexx/MechanicalKeyboard'
+live: 'https://keyui.vercel.app/'
+timeline: 2 Weeks
+role: Frontend & Audio Engineer
+team: Solo
+status: completed
 featured: true
-challenges:
-  - Low-Latency Sound Mapping with HTML5 Audio Context
-  - High-Fidelity Responsive Keyboard Grid Layout
-  - Mobile Vibration and Tactile Haptics Syncing
-learnings:
-  - Audio Buffering & Prefetching in React
-  - Web Haptics integration for mobile tactile feeling
-  - Handling simultaneous hardware and touch events
+problem: >-
+  An interactive keyboard has to respond to real key presses as well as clicks
+  and touch. This project combines those inputs with keyboard geometry, sound,
+  and visual feedback.
+contribution: >-
+  Built reusable keyboard components and the interface for exploring their
+  layouts and interaction feedback.
+outcome: >-
+  An interactive demo and reusable keyboard components for React projects, with
+  layout, theme, and feedback behavior visible in the repository.
+statusLabel: Completed
+decisions:
+  - title: Reflect physical input
+    description: >-
+      Physical key presses activate the corresponding keys in the rendered
+      layout, connecting hardware input to the visual component.
+  - title: Combine input feedback
+    description: >-
+      Key interactions include switch sounds and haptic feedback on supported
+      touch devices. Sound is configurable through the component interface.
+  - title: Make the component reusable
+    description: >-
+      The repository provides copyable React components with theme and sound
+      options, including Apple Magic Keyboard and Keychron K2 replicas.
+evidence:
+  - label: Component usage
+    href: 'https://github.com/sahilcodexx/MechanicalKeyboard#readme'
 ---
 
-# Mechanical Keyboard Simulator
+## Interaction is the main feature
 
-An interactive, high-fidelity mechanical keyboard simulator built with React, TypeScript, and Tailwind CSS. The app lets users explore different mechanical switch sounds (clicky, tactile, linear), swap keycap colorways, and get a tactile experience directly in the browser.
+The keyboard connects a physical key press to a visible keycap and sound. On compatible touch devices, haptic feedback adds another response to the interaction. The layout matters because differently sized keys must still read as a real keyboard.
 
-I built it because I couldn’t decide between keycap sets without hearing the switches, and there wasn’t a single tool that did both.
+## Beyond the demo
 
----
+A component can be configured with a theme and enabled sound, then placed inside another React application. That makes the demo a way to inspect a reusable interface, with the implementation available for developers who want to adapt it.
 
-## Key features
-
-- **Interactive virtual layout.** A fully interactive, responsive QWERTY layout matching standard 60%/65% mechanical keyboards.
-- **Realistic audio engine.** Uses the HTML5 Audio Context to pre-decode and stream switch clacks, minimizing trigger latency.
-- **Aesthetic keycap themes.** Swap between multiple colorways: Classic, Mint, Royal, Dolch, Sand, Scarlet.
-- **Tactile haptic feedback.** Uses `web-haptics` to deliver vibration on compatible mobile browsers.
-- **Dual input mapping.** Highlights virtual keycaps on physical keyboard keydown events while supporting touch and click.
-
----
-
-## Tech stack and architecture
-
-- **Core.** React 19, TypeScript, Vite.
-- **Audio engine.** HTML5 AudioContext, Web Audio API buffers.
-- **Styling.** Tailwind CSS (utility classes, flex/grid layouts, responsive scaling).
-- **Haptics.** Native Vibration API with fallback wrappers.
-- **Icons.** Lucide React.
+Device support determines whether haptic feedback is available. The component's visual and sound behavior can be explored directly in the live project.

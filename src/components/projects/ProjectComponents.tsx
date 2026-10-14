@@ -116,44 +116,6 @@ const ProjectMeta = ({
   </div>
 );
 
-// Challenges
-const Challenges = ({ challenges = [] }: { challenges?: string[] }) => (
-  <div className="my-6 rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 sm:p-6">
-    <h4 className="mb-3 text-lg font-semibold text-amber-600 dark:text-amber-400">
-      Key Challenges
-    </h4>
-    <ul className="space-y-2.5">
-      {challenges.map((challenge, index) => (
-        <li
-          key={index}
-          className="flex items-start gap-2.5 text-sm text-foreground/90 leading-relaxed"
-        >
-          <span className="mt-1.5 block size-1.5 shrink-0 rounded-full bg-amber-500" />
-          <span>{challenge}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-// Learnings
-const Learnings = ({ learnings = [] }: { learnings?: string[] }) => (
-  <div className="my-6 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 sm:p-6">
-    <h4 className="mb-3 text-lg font-semibold text-emerald-600 dark:text-emerald-400">Key Learnings</h4>
-    <ul className="space-y-2.5">
-      {learnings.map((learning, index) => (
-        <li
-          key={index}
-          className="flex items-start gap-2.5 text-sm text-foreground/90 leading-relaxed"
-        >
-          <span className="mt-1.5 block size-1.5 shrink-0 rounded-full bg-emerald-500" />
-          <span>{learning}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
 interface ImageProps {
   src: string;
   alt: string;
@@ -298,6 +260,4 @@ export const ProjectComponents = {
   Technology,
   TechStack,
   ProjectMeta,
-  Challenges,
-  Learnings,
 };

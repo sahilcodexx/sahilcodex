@@ -1,125 +1,62 @@
 ---
-title: "Image Editor AI"
-description: "An open-source AI image editor built with Next.js and Convex. Background removal, style transfer, and standard crop/resize/adjust tools in one canvas-based UI."
-image: "/projects/repimly.avif"
+title: Repimly
+description: >-
+  An image editor combining Fabric.js canvas tools with AI processing. Next.js
+  powers the app, Convex stores projects, and ImageKit handles image storage and
+  transformations.
+image: /projects/repimly.avif
 technologies:
-  - TypeScript
   - Next.js
+  - TypeScript
   - React
-  - TailwindCSS
-github: "https://github.com/sahilcodexx/Image-Editor-AI"
-live: "https://repimly.vercel.app/"
-timeline: "Ongoing"
-role: "Full-Stack Developer"
-team: "Solo"
-status: "In Development"
+  - Fabric.js
+  - Convex
+  - Clerk
+  - ImageKit
+  - Tailwind CSS
+github: 'https://github.com/sahilcodexx/Image-Editor-AI'
+live: 'https://repimly.vercel.app/'
+timeline: Ongoing
+role: Full-Stack Developer
+team: Solo
+status: in-progress
 featured: true
-challenges:
-  - Integrating AI models for image processing
-  - Building a performant and intuitive user interface
-  - Managing complex state for image editing tools
-learnings:
-  - Advanced TypeScript and Next.js features
-  - Working with AI APIs for image manipulation
-  - Optimizing front-end performance for a media-heavy application
 isPublished: true
+problem: >-
+  Image editing involves more than a single AI request. Repimly brings manual
+  adjustments, AI tools, and saved projects into one canvas-based workflow.
+contribution: >-
+  The project connects the editing interface, canvas state, authenticated
+  project management, and image-processing services.
+outcome: >-
+  An image-editing application in active development, with manual tools, AI
+  processing, and cloud-backed project management described in the repository.
+statusLabel: In development
+decisions:
+  - title: A canvas for manual edits
+    description: >-
+      Fabric.js provides the editing layer for image and text manipulation.
+      Crop, resize, and color adjustments sit alongside the AI tools.
+  - title: Persist the project
+    description: >-
+      Convex stores project data, Clerk supplies authentication, and ImageKit
+      handles image assets. These services have separate roles in the editing
+      workflow.
+  - title: Connect tools to one workspace
+    description: >-
+      AI retouching, upscaling, background removal, and image extension are
+      exposed from the editor rather than separate standalone pages.
+evidence:
+  - label: Editor structure and tools
+    href: 'https://github.com/sahilcodexx/Image-Editor-AI#readme'
 ---
 
-# Image Editor AI
+## The editing workflow
 
-Image Editor AI is an open-source, AI-powered image editing tool built with Next.js. It provides an interface to apply edits using AI models (background removal, image enhancement, style transfer) along with the standard crop, resize, and color adjustment tools.
+Start a project with an uploaded image or blank canvas. Resize or crop the canvas, adjust image properties, add text, or use an AI tool. Project management and saving give the editor a workflow beyond uploading an image and receiving a processed file.
 
-This project is my attempt to build a single editor that combines the AI features I actually use with the basic editing tools that AI-only tools always leave out.
+## The integration work
 
----
+Canvas operations, remote image processing, and saved project data need to agree about which image is being edited. The repository separates canvas context, project database functions, and image services so their responsibilities can be reviewed individually.
 
-## What users can do
-
-- **Apply AI-powered edits.** Use AI models for background removal, image enhancement, and style transfer.
-- **Manipulate images.** Standard image editing tasks: crop, resize, color adjustments.
-- **Transform images.** Apply filters and effects.
-- **Clean interface.** A canvas-based UI that keeps the basic tools within reach.
-
----
-
-## Key features
-
-- **AI-powered editing.** Integrates with AI models for image manipulation.
-- **Rich editing toolset.** Basic and advanced image editing in one place.
-- **Next.js and React.** Built with a TypeScript-first stack.
-- **TypeScript.** End-to-end type safety.
-- **Tailwind CSS.** Utility-first CSS for fast UI work.
-- **Open source.** The project is open-source, contributions welcome.
-
----
-
-## Why I built this
-
-- To explore the intersection of AI and web development.
-- To build a practical tool anyone can use.
-- To deepen my knowledge of Next.js, TypeScript, and modern frontend technologies.
-- To create a foundation for future work in AI-powered applications.
-
----
-
-## Tech stack
-
-### Frontend
-
-- **Next.js.** React framework for server-rendered and statically generated web apps.
-- **React.** JavaScript library for building user interfaces.
-- **Tailwind CSS.** Utility-first CSS framework for custom designs.
-- **TypeScript.** Typed superset of JavaScript that compiles to plain JavaScript.
-
-### Backend and AI
-
-- **Next.js API routes.** Serverless functions for talking to AI models.
-- **AI models.** Integration with various image processing and generation models.
-
----
-
-## Development experience
-
-### Full-stack development
-
-- Built both the front-end and back-end using Next.js.
-- Implemented API routes to handle requests to AI models.
-- Managed application state using React hooks and context.
-
-### AI integration
-
-- Researched and integrated various AI models for image editing.
-- Handled asynchronous communication with AI services.
-- Tuned the performance of AI-powered features.
-
-### UI and design
-
-- Designed a clean and user-friendly interface with Tailwind CSS.
-- Focused on an intuitive and responsive user experience.
-- Implemented a component-based architecture for the UI.
-
----
-
-## Impact and results
-
-- A functional prototype of an AI-powered image editor.
-- A well-structured and scalable codebase.
-- A useful learning experience in building full-stack AI applications.
-
----
-
-## Future enhancements
-
-- **More AI features.** Object detection, image generation.
-- **User accounts.** Save work and create a gallery of edited images.
-- **Real-time collaboration.** Multiple users editing the same image at once.
-- **Plugin system.** Let developers add their own editing tools.
-
----
-
-## Key learnings
-
-- How to build a full-stack application with Next.js.
-- How to integrate AI models into a web application.
-- How to design and build a complex user interface.
-- The importance of performance and optimization in a media-heavy application.
+This project is still developing. Its strongest review surface is the connection between an interactive canvas and the services used for authentication, persistence, and image processing.

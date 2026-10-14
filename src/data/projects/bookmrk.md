@@ -1,52 +1,64 @@
 ---
-title: "Bookmrk: Privacy-First Bookmark Manager"
-description: "A Chrome extension and web dashboard for managing bookmarks. Everything is stored locally in IndexedDB, no server, no account. Boards, Cmd-K search, keyboard shortcuts."
-image: "/projects/bookmrkit.avif"
+title: Bookmrk
+description: >-
+  A bookmark workspace with search, custom tags, and a command palette. Next.js
+  and Supabase handle account-based storage; optimistic updates keep editing
+  responsive.
+image: /projects/bookmrkit.avif
 technologies:
-  - React / Next.js
+  - Next.js
   - TypeScript
   - Tailwind CSS
-  - Chrome Extension API
-  - LocalStorage / IndexedDB
-  - CMD K Command Palette
-github: "https://github.com/sahilcodexx/Bookmrk"
-live: "https://bookmrkit.vercel.app/"
-timeline: "Active Development"
-role: "Lead Developer"
-team: "Solo"
-status: "Building"
+  - Supabase
+  - cmdk
+github: 'https://github.com/sahilcodexx/Bookmrk'
+live: 'https://bookmrkit.vercel.app/'
+timeline: Active Development
+role: Full-stack developer
+team: Solo
+status: in-progress
 featured: true
-challenges:
-  - Designing a highly-performant local search across thousands of bookmarks
-  - Integrating smoothly with browser native bookmark storage structures
-  - Providing a keyboard-first user experience using visual hotkeys
-learnings:
-  - Modern Chrome Extension structure & service worker communication
-  - Local-first architecture and instant data sync
-  - Building robust command palettes & board configurations
+problem: >-
+  Saved links lose their value when finding one takes longer than searching the
+  web again. Bookmrk gives bookmarks a searchable workspace with custom tags and
+  keyboard commands.
+contribution: >-
+  The work spans the dashboard, bookmark and tag APIs, authentication, and the
+  client-side data layer that keeps the interface in sync with saved data.
+outcome: >-
+  A web workspace with bookmark CRUD, custom tags, search, and keyboard actions.
+  The current implementation persists bookmarks through a signed-in account.
+statusLabel: In development
+decisions:
+  - title: Optimistic editing
+    description: >-
+      Adds, edits, and deletes update the interface before the request finishes.
+      Failed requests restore the previous state and show an error, so
+      responsiveness does not hide a failed save.
+  - title: Account-aware storage
+    description: >-
+      Supabase authentication and per-request database clients connect browser
+      sessions to server routes. Row-level security scopes bookmark and tag
+      queries to the signed-in user.
+  - title: Keyboard access
+    description: >-
+      A Cmd-K palette exposes actions such as adding a bookmark, focusing
+      search, and clearing filters. A shared data hook keeps these controls
+      separate from persistence logic.
+evidence:
+  - label: Bookmark data hook
+    href: >-
+      https://github.com/sahilcodexx/Bookmrk/blob/main/lib/hooks/use-bookmarks.ts
+  - label: Database access
+    href: 'https://github.com/sahilcodexx/Bookmrk/blob/main/lib/bookmarks.ts'
 ---
 
-# Bookmrk (Bookmark Manager)
+## A workflow for finding things again
 
-A keyboard-first, local-first bookmark manager and tab organizer. Built with React, TypeScript, Next.js, and Tailwind CSS. Designed to help developers and power users organize, explore, and access their bookmarks instantly without leaving the keyboard.
+Save a URL with a title and tags, then narrow the collection through search and tag filters. Editing and deletion stay within the same workspace. The command palette makes common actions available without moving between menus.
 
-I built it because I had four thousand bookmarks across three browsers and no way to find any of them.
+## Where the engineering sits
 
----
+The `useBookmarks` hook owns the bookmark list and mutation helpers. API routes handle requests, while the database access functions work with the user's Supabase session. This separates interface state, HTTP handling, and storage instead of placing all three inside the page.
 
-## Key features
-
-- **Keyboard-first navigation.** Open boards, switch tabs, search bookmarks, and edit links using shortcuts and a Cmd-K command palette.
-- **Visual board workspaces.** Group bookmarks in clean visual cards and grids, with workspaces for different projects, clients, or topics.
-- **Local-first architecture.** Bookmarks are stored locally in IndexedDB and LocalStorage for instant loads and zero server round-trips.
-- **Smart tagging and search.** Customizable labels, tags, and fuzzy search to retrieve links in milliseconds.
-- **Chrome extension sync.** One click to save tabs or links from the companion Chrome extension.
-
----
-
-## Tech stack and architecture
-
-- **Frontend.** Next.js, React, TypeScript, Tailwind CSS.
-- **Storage.** LocalStorage and IndexedDB.
-- **Components.** Custom Cmd-K command bar, visual card grids, custom modal systems.
-- **Design philosophy.** Minimalist layout, dark mode, high-contrast focus states.
+The useful detail is the rollback path. An optimistic interface needs to recover from a rejected request as carefully as it handles a successful one. The hook replaces temporary entries with saved records and removes them if creation fails.

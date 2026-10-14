@@ -10,6 +10,7 @@ import TailwindCss from '@/components/icons/tech/TailwindCss';
 import TypeScript from '@/components/icons/tech/TypeScript';
 import Vite from '@/components/icons/tech/Vite';
 import { NodeJs, Npm } from '@/lib/techIcons';
+import { Code2, Database, Music2, Smartphone } from 'lucide-react';
 
 export const ProjectCardData = [
   {
@@ -23,7 +24,7 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'Searches TMDB for movies, posters, and ratings. React + Vite, built in three days when I was learning hooks. The search input is debounced so the API request doesn’t fire on every keystroke.',
+      'A React movie search app using TMDB, with a 900 ms search debounce, loading and error states, and an Appwrite-backed list of frequently searched movies.',
     links: {
       website: 'https://find-moviename.vercel.app/',
       github: 'https://github.com/sahilcodexx/movie-app',
@@ -46,9 +47,9 @@ export const ProjectCardData = [
         href: 'https://tailwindcss.com/',
       },
       {
-        name: 'TailwindCSS',
-        icon: <TailwindCss />,
-        href: 'https://tailwindcss.com/',
+        name: 'Appwrite',
+        icon: <Database />,
+        href: 'https://appwrite.io/',
       },
       {
         name: 'Vite',
@@ -72,11 +73,11 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'An animation-heavy landing page built around GSAP and ScrollTrigger. Sections fade, slide, and stagger as you scroll, with a 3D parallax layer and a config that respects the user’s reduced-motion setting.',
+      'A GSAP animation project built with JavaScript, Vite, and Tailwind CSS. Reusable animation helpers organize the motion work behind the interactive landing page.',
     links: {
       website: 'https://nova-gsap.vercel.app/',
       github: 'https://github.com/sahilcodexx/nova-gsap',
-      details: '/projects/findmovie',
+      details: '/projects/nova',
     },
     technologies: [
       {
@@ -116,7 +117,7 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'Pastes in whatever’s in your fridge, gets back a recipe. React + Framer Motion on the front, Puter.js for the AI call and client-side storage. The state management is the part I’m most proud of, since the recipe steps animate as they stream in.',
+      'A recipe assistant built with React and Puter.js. It keeps conversation context, checks AI readiness, and handles pending responses and provider errors in the chat.',
     links: {
       website: 'https://chefyai.vercel.app/',
       github: 'https://github.com/sahilcodexx/ai-recipe',
@@ -151,7 +152,7 @@ export const ProjectCardData = [
   },
   {
     id: 4,
-    title: 'Image Editor AI',
+    title: 'Repimly',
     subheading: 'AI-Powered Image Editor',
     img: {
       src: '/projects/repimly.avif',
@@ -160,7 +161,7 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'Open-source image editor with AI models for background removal, style transfer, and cleanup. Next.js on the front, Convex for state, still actively shipping. The slow part was wiring the AI outputs back into the canvas without freezing the UI.',
+      'An image editor combining Fabric.js canvas tools with AI processing. Next.js powers the app, Convex stores projects, and ImageKit handles image storage and transformations.',
     links: {
       website: 'https://repimly.vercel.app/',
       github: 'https://github.com/sahilcodexx/Image-Editor-AI',
@@ -188,8 +189,8 @@ export const ProjectCardData = [
         href: 'https://tailwindcss.com/',
       },
     ],
-    isWorking: true,
-    isBulding: false,
+    isWorking: false,
+    isBulding: true,
     details: true,
     projectDetailsPageSlug: '/projects/imageeditorai',
   },
@@ -204,7 +205,7 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'Paste a product link from Amazon or Flipkart, get a price history chart and an email when it drops. Firecrawl handles the scraping, Supabase stores the history, Next.js Server Actions handle the writes. Still in development, currently adding per-user watchlists.',
+      'A product-price tracker built with Next.js, Supabase, and Firecrawl. It saves extracted product data and price history; scheduled checks and email alerts remain in development.',
     links: {
       website: 'https://trackhatke.vercel.app/',
       github: 'https://github.com/sahilcodexx/price-tracker',
@@ -232,8 +233,8 @@ export const ProjectCardData = [
         href: 'https://supabase.com/',
       },
     ],
-    isWorking: true,
-    isBulding: false,
+    isWorking: false,
+    isBulding: true,
     details: true,
     projectDetailsPageSlug: '/projects/pricetracker',
   },
@@ -248,7 +249,7 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'A CLI and npm package that writes your commit message for you. Reads the staged diff, sends it to OpenRouter, returns a conventional commit. Bring your own key or use the hosted version with a free trial.',
+      'A TypeScript CLI that reads a Git diff and asks OpenRouter for a conventional commit message. Developers can accept, regenerate, or exit before committing.',
     links: {
       website: 'https://tcxcommit.vercel.app/',
       github: 'https://github.com/sahilcodexx/tcxcommit',
@@ -280,7 +281,7 @@ export const ProjectCardData = [
   {
     id: 7,
     title: 'Mechanical Keyboard',
-    subheading: 'Interactive Keyboard Simulator',
+    subheading: 'Interactive React Keyboard Components',
     img: {
       src: '/projects/keyui.avif',
       alt: 'Mechanical Keyboard project image',
@@ -288,7 +289,7 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'An interactive mechanical keyboard for the browser. Real switch sounds pre-decoded through the Audio Context API, several keycap themes (Dolch, Sand, Scarlet), haptics on mobile, and a volume slider. The latency tuning took longer than the rest of the project combined.',
+      'A React keyboard component library with Apple Magic Keyboard and Keychron K2 layouts, physical key tracking, switch sounds, and haptic feedback on supported devices.',
     links: {
       website: 'https://keyui.vercel.app/',
       github: 'https://github.com/sahilcodexx/MechanicalKeyboard',
@@ -324,7 +325,7 @@ export const ProjectCardData = [
   {
     id: 8,
     title: 'Bookmrk',
-    subheading: 'Privacy-First Bookmark Manager',
+    subheading: 'Bookmark Workspace',
     img: {
       src: '/projects/bookmrkit.avif',
       alt: 'Bookmrk project image',
@@ -332,7 +333,7 @@ export const ProjectCardData = [
       height: 1080,
     },
     description:
-      'A Chrome extension and web dashboard for managing bookmarks. Everything is stored locally in IndexedDB, no server, no account. Boards for grouping, a Cmd-K palette for search, keyboard shortcuts for the heavy users, and a clean export when you want out.',
+      'A bookmark workspace with search, custom tags, and a command palette. Next.js and Supabase handle account-based storage; optimistic updates keep editing responsive.',
     links: {
       website: 'https://bookmrkit.vercel.app/',
       github: 'https://github.com/sahilcodexx/Bookmrk',
@@ -354,10 +355,83 @@ export const ProjectCardData = [
         icon: <TailwindCss />,
         href: 'https://tailwindcss.com/',
       },
+      {
+        name: 'Supabase',
+        icon: <Supabase />,
+        href: 'https://supabase.com/',
+      },
+    ],
+    isWorking: false,
+    isBulding: true,
+    details: true,
+    projectDetailsPageSlug: '/projects/bookmrk',
+  },
+  {
+    id: 9,
+    title: 'Aro Music',
+    subheading: 'Android Music Player',
+    img: {
+      src: '/aromusic.avif',
+      alt: 'Aro Music website with the Android home screen and music player',
+      width: 2072,
+      height: 1222,
+    },
+    description:
+      'An Android music app combining local playback, YouTube Music discovery, and Spotify playlist imports. Kotlin and Compose power the app, with a Next.js companion website.',
+    links: {
+      website: 'https://aromusic.vercel.app/',
+      github: 'https://github.com/sahilcodexx/aro-music',
+      details: '/projects/aro-music',
+    },
+    technologies: [
+      { name: 'Kotlin', icon: <Code2 />, href: 'https://kotlinlang.org/' },
+      {
+        name: 'Jetpack Compose',
+        icon: <Smartphone />,
+        href: 'https://developer.android.com/compose',
+      },
+      {
+        name: 'Media3',
+        icon: <Music2 />,
+        href: 'https://developer.android.com/media/media3',
+      },
+      {
+        name: 'Room',
+        icon: <Database />,
+        href: 'https://developer.android.com/training/data-storage/room',
+      },
     ],
     isWorking: true,
     isBulding: false,
     details: true,
-    projectDetailsPageSlug: '/projects/bookmrk',
+    projectDetailsPageSlug: '/projects/aro-music',
+  },
+  {
+    id: 10,
+    title: 'Linux Dictation',
+    subheading: 'Local Voice-to-Text App · Upcoming',
+    img: {
+      src: '',
+      alt: '',
+      width: 1920,
+      height: 1080,
+    },
+    description:
+      'A planned free dictation app focused on Linux. Record speech, transcribe it locally, and insert the text into your workflow without a cloud transcription subscription.',
+    links: {
+      website: '',
+      github: '',
+      details: '/projects/linux-dictation',
+    },
+    technologies: [
+      { name: 'Linux', icon: <Code2 />, href: '' },
+      { name: 'Local inference', icon: <Code2 />, href: '' },
+      { name: 'Speech to text', icon: <Code2 />, href: '' },
+    ],
+    statusLabel: 'Upcoming',
+    isWorking: false,
+    isBulding: false,
+    details: true,
+    projectDetailsPageSlug: '/projects/linux-dictation',
   },
 ];

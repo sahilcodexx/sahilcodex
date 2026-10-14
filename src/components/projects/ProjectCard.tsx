@@ -53,13 +53,22 @@ const ProjectCard = ({
                         href={items.projectDetailsPageSlug ?? items.links.details}
                         className="flex flex-1 flex-col gap-1 text-left hover:no-underline"
                       >
-                        <Image
-                          alt={items.img.alt}
-                          src={items.img.src}
-                          width={1200}
-                          height={630}
-                          className="h-52 w-full rounded-lg object-cover object-top"
-                        />
+                        {items.img?.src ? (
+                          <Image
+                            alt={items.img.alt}
+                            src={items.img.src}
+                            width={1200}
+                            height={630}
+                            className="h-52 w-full rounded-lg object-cover object-top"
+                          />
+                        ) : (
+                          <div
+                            aria-hidden="true"
+                            className="bg-muted/30 text-muted-foreground flex h-52 w-full items-center justify-center rounded-lg text-sm"
+                          >
+                            {items.statusLabel === 'Upcoming' ? 'Coming soon' : null}
+                          </div>
+                        )}
 
                         {/* Header with Title and Pulsing Status */}
                         <div className="mt-2.5 pt-0.5 flex items-center justify-between px-1">
@@ -76,7 +85,7 @@ const ProjectCard = ({
                               )}
                             />
                             <span className="text-muted-foreground text-xs font-medium">
-                              {items.isWorking ? 'Live' : 'Building'}
+                              {items.statusLabel || (items.isWorking ? 'Live' : 'Building')}
                             </span>
                           </div>
                         </div>
@@ -129,7 +138,7 @@ const ProjectCard = ({
                               <Github />
                             </a>
                           </>
-                        ) : (
+                        ) : items.links.github || items.links.website ? (
                           <a
                             href={items.links.github || items.links.website}
                             target="_blank"
@@ -152,6 +161,13 @@ const ProjectCard = ({
                               </svg>
                             )}
                           </a>
+                        ) : (
+                          <Link
+                            href={items.projectDetailsPageSlug ?? items.links.details}
+                            className="text-muted-foreground hover:text-foreground w-full text-center text-sm"
+                          >
+                            View plans
+                          </Link>
                         )}
                       </div>
                     </div>
