@@ -45,6 +45,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/projects/imageeditorai',
+        destination: '/projects/figart',
+        permanent: true,
+      },
+    ];
+  },
   turbopack: {
     root: repoRoot,
   },
