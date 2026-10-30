@@ -12,7 +12,12 @@ import LoaderAnimation from '@/components/ui/loader-animation';
 import MacDock from '@/components/ui/mac-dock';
 import AiImageCard from '@/components/ui/ai-image-card';
 import SearchBar from '@/components/ui/search-bar';
+import DetailedButton from '@/components/ui/detailed-button';
+import Password from '@/components/ui/password';
 import Link from 'next/link';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-component-demo' });
 
 type ComponentItem = {
   id: string;
@@ -24,6 +29,32 @@ type ComponentItem = {
 };
 
 const COMPONENTS: ComponentItem[] = [
+  {
+    id: 'detailed-button',
+    title: 'Detailed Button',
+    description:
+      'Tactile four-variant button with inset gloss, a gradient border, and spring hover/press feedback that respects reduced-motion preferences.',
+    href: '/components/detailed-button',
+    badge: 'UI · Motion',
+    preview: (
+      <div className={`my-2 flex flex-wrap items-center justify-center gap-3 ${inter.variable} [font-family:var(--font-component-demo)] [&_.font-sans]:[font-family:var(--font-component-demo)]`}>
+        <DetailedButton variant="blue">Continue</DetailedButton>
+      </div>
+    ),
+  },
+  {
+    id: 'password',
+    title: 'Password Verification',
+    description:
+      'Six-digit code verification pill that expands from an idle button, animates each digit, and confirms with a shine sweep.',
+    href: '/components/password',
+    badge: 'Interactive · Auth',
+    preview: (
+      <div className={`w-full max-w-[440px] zoom-[0.75] ${inter.variable} [font-family:var(--font-component-demo)] [&_.font-sans]:[font-family:var(--font-component-demo)]`}>
+        <Password />
+      </div>
+    ),
+  },
   {
     id: 'mac-keyboard',
     title: 'Mac Keyboard',
