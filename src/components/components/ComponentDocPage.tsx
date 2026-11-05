@@ -36,8 +36,6 @@ interface ComponentDocPageProps {
   sourceCode: string;
   usageCode: string;
   preview: ReactNode;
-  stylesheet?: string;
-  stylesheetPath?: string;
 }
 
 const SITE_URL = 'https://sahilcodex.vercel.app';
@@ -52,8 +50,6 @@ export default function ComponentDocPage({
   sourceCode,
   usageCode,
   preview,
-  stylesheet,
-  stylesheetPath,
 }: ComponentDocPageProps) {
   const [installTab, setInstallTab] = useState<'cli' | 'manual'>('cli');
   const [activePm, setActivePm] = useState<PackageManager>('pnpm');
@@ -96,7 +92,7 @@ export default function ComponentDocPage({
   const cliCommands: Record<PackageManager, string> = {
     pnpm: `pnpm dlx shadcn@latest add ${registryUrl}`,
     npm: `npx shadcn@latest add ${registryUrl}`,
-    yarn: `npx shadcn@latest add ${registryUrl}`,
+    yarn: `yarn dlx shadcn@latest add ${registryUrl}`,
     bun: `bunx --bun shadcn@latest add ${registryUrl}`,
   };
 
@@ -107,7 +103,12 @@ export default function ComponentDocPage({
     bun: `bun add ${dependencies.join(' ')}`,
   };
 
-  const registryDepsCommand = `npx shadcn@latest add ${registryDependencies.join(' ')}`;
+  const registryDepsCommands: Record<PackageManager, string> = {
+    pnpm: `pnpm dlx shadcn@latest add ${registryDependencies.join(' ')}`,
+    npm: `npx shadcn@latest add ${registryDependencies.join(' ')}`,
+    yarn: `yarn dlx shadcn@latest add ${registryDependencies.join(' ')}`,
+    bun: `bunx --bun shadcn@latest add ${registryDependencies.join(' ')}`,
+  };
 
   const packageManagers = (['pnpm', 'npm', 'yarn', 'bun'] as PackageManager[]).map((pm) => (
     <button
@@ -328,33 +329,14 @@ export default function ComponentDocPage({
                       </h3>
                       <div className="relative rounded-xl border border-border bg-card p-4 font-mono text-xs flex items-center justify-between">
                         <span className="text-foreground select-all">
-                          {registryDepsCommand}
+                          {registryDepsCommands[activePm]}
                         </span>
                         <button
-                          onClick={() => copyToClipboard(registryDepsCommand, 'registry-deps')}
+                          onClick={() => copyToClipboard(registryDepsCommands[activePm], 'registry-deps')}
                           className="p-1.5 rounded-lg border border-border bg-background hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                         >
                           {copiedId === 'registry-deps' ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
                         </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {stylesheet && (
-                    <div className="space-y-2">
-                      <h3 className="text-sm font-semibold text-foreground">
-                        Add stylesheet to <code>{stylesheetPath}</code>
-                      </h3>
-                      <div className="relative rounded-xl border border-border bg-card p-4">
-                        <button
-                          onClick={() => copyToClipboard(stylesheet, 'stylesheet')}
-                          className="absolute right-3 top-3 rounded-md border border-border bg-muted px-2 py-1 text-xs"
-                        >
-                          {copiedId === 'stylesheet' ? 'Copied' : 'Copy'}
-                        </button>
-                        <div className="max-h-64 overflow-auto pt-6">
-                          <HighlightedCode code={stylesheet} isDark={isDark} />
-                        </div>
                       </div>
                     </div>
                   )}
