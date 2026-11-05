@@ -40,7 +40,12 @@ const Navbar = () => {
             >
               <div>
                 <Link href="/">
-                  <h2 className={`${pixelify.className} text-2xl uppercase`}>SAHIL</h2>
+                  <h2
+                    className={`${pixelify.className} text-2xl uppercase`}
+                    style={{ fontFamily: 'var(--font-pixelify), "Pixelify Sans", sans-serif' }}
+                  >
+                    SAHIL
+                  </h2>
                 </Link>
               </div>
               <div className="flex items-center gap-4">
