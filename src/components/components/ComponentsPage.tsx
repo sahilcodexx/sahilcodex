@@ -14,6 +14,7 @@ import AiImageCard from '@/components/ui/ai-image-card';
 import SearchBar from '@/components/ui/search-bar';
 import DetailedButton from '@/components/ui/detailed-button';
 import Password from '@/components/ui/password';
+import TextToolbar from '@/components/ui/text-toolbar';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
 
@@ -29,6 +30,19 @@ type ComponentItem = {
 };
 
 const COMPONENTS: ComponentItem[] = [
+  {
+    id: 'text-toolbar',
+    title: 'Text Toolbar',
+    description:
+      'Floating rich text formatting toolbar with color wheel palette, live selection handles, typography controls, and popover actions.',
+    href: '/components/text-toolbar',
+    badge: 'Interactive · Editor',
+    preview: (
+      <div className="flex w-full items-center justify-center transform scale-[0.72] xs:scale-[0.78] sm:scale-[0.82] origin-center pointer-events-none">
+        <TextToolbar toolbarOnly />
+      </div>
+    ),
+  },
   {
     id: 'detailed-button',
     title: 'Detailed Button',
