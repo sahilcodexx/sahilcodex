@@ -10,11 +10,6 @@ const sourceCode = readFileSync(
   'utf8',
 );
 
-const stylesheet = readFileSync(
-  path.join(process.cwd(), 'src/components/ui/detailedbutton.module.css'),
-  'utf8',
-);
-
 const usageCode = `import DetailedButton from "@/components/ui/detailed-button";
 
 export default function Page() {
@@ -50,8 +45,6 @@ export default function Page() {
       sourcePath="components/ui/detailed-button.tsx"
       sourceCode={sourceCode}
       usageCode={usageCode}
-      stylesheet={stylesheet}
-      stylesheetPath="components/ui/detailedbutton.module.css"
       preview={
         <div className="flex flex-wrap items-center justify-center gap-3">
           <DetailedButton variant="blue">
