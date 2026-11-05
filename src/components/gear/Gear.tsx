@@ -154,7 +154,7 @@ export default function GearsPage() {
                         {device.icon}
                       </div>
                       <div className="flex-1 space-y-1 border-l border-dashed border-border p-4 pr-2">
-                        <h3 className="leading-snug font-medium text-balance text-secondary">
+                        <h3 className="leading-snug font-medium text-balance text-foreground">
                           {device.name}
                         </h3>
                       </div>
@@ -174,7 +174,7 @@ export default function GearsPage() {
                   <li key={extension.name} className="list-none">
                     <div className="relative flex items-center pr-2 hover:bg-neutral-100 dark:hover:bg-neutral-900/40 group">
                       <div className="mx-4 bg-muted flex items-center justify-center rounded-md border border-black/10 px-2 py-1 text-[#736F70] dark:border-white/10 select-none">
-                        <span className="text-secondary text-sm font-semibold">{index + 1}</span>
+                        <span className="text-foreground text-sm font-semibold">{index + 1}</span>
                       </div>
                       <div className="flex-1 space-y-1 border-l border-dashed border-border p-4 pr-2">
                         <h3 className="leading-snug font-medium text-balance">
@@ -207,7 +207,7 @@ export default function GearsPage() {
                   <li key={app.name} className="list-none">
                     <div className="relative flex items-center pr-2 hover:bg-neutral-100 dark:hover:bg-neutral-900/40 group">
                       <div className="mx-4 bg-muted flex items-center justify-center rounded-md border border-black/10 px-2 py-1 text-[#736F70] dark:border-white/10 select-none">
-                        <span className="text-secondary text-sm font-semibold">{index + 1}</span>
+                        <span className="text-foreground text-sm font-semibold">{index + 1}</span>
                       </div>
                       <div className="flex-1 space-y-1 border-l border-dashed border-border p-4 pr-2">
                         <h3 className="leading-snug font-medium text-balance">
